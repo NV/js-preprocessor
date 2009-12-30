@@ -16,6 +16,7 @@ style.css
     .my-style {background: #fffacc}
 
 
+result
     example$ ../bin/jspreprocessor main.js
     var my_script;
     
@@ -25,4 +26,4 @@ style.css
 
 Why?
 ----
-Because [http://github.com/sstephenson/sprockets](Sprockets) can't include non-JS files.
+Because [Sprockets](http://github.com/sstephenson/sprockets) can't include non-JS files.
