@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+ARGV.each do |a|
+  f = File.read(a)
+  puts f.gsub!(%r{"/\*>\s*(.+?)\s*\*/"}) {
+    "'" << File.read($1).gsub(%r{$}, '\\').chop << "'"
+  }.gsub!(%r{/\*>\s*(.+?)\s*\*/}) {
+    File.read($1)
+  }
+end
