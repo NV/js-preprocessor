@@ -1,10 +1,21 @@
 #!/usr/bin/env ruby
 
-ARGV.each do |a|
-  f = File.read(a)
-  puts f.gsub!(%r{"/\*>\s*(.+?)\s*\*/"}) {
+def parse(text='')
+  text.gsub!(%r{"/\*>\s*(.+?)\s*\*/"}) {
     "'" << File.read($1).gsub(%r{$}, '\\').chop << "'"
-  }.gsub!(%r{/\*>\s*(.+?)\s*\*/}) {
+  }
+  text.gsub!(%r{/\*>\s*(.+?)\s*\*/}) {
     File.read($1)
   }
+  puts text
+end
+
+unless ARGV.empty?
+  ARGV.each do |a|
+    parse(File.read(a))
+  end
+end
+
+if STDIN.stat.size > 0
+  parse(STDIN.read)
 end
