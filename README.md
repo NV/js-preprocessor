@@ -26,4 +26,9 @@ result
 
 Why?
 ----
-Because [Sprockets](http://github.com/sstephenson/sprockets) can't include non-JS files.
+[Sprockets](http://github.com/sstephenson/sprockets) can't include non-JS files.
+JS preprocessor can.
+
+[Juicer](http://github.com/cjohansen/juicer) include one JS file to another via
+`@depend` statement, but can't include CSS file to JS as multiline string. 
+JS preprocessor can do it via `"/*> some_file */"`.
