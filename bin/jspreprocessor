@@ -1,21 +1,19 @@
 #!/usr/bin/env ruby
 
+$dir = File.dirname ARGV.first || '.'
+
 def parse(text='')
   text.gsub!(%r{"/\*>\s*(.+?)\s*\*/"}) {
-    "'" << parse(File.read($1)).gsub(%r{$}, '\\').chop << "'"
+    '"' << parse(File.read File.join($dir, $1)).gsub(%r{$}, '\\').chop << '"'
   }
   text.gsub!(%r{/\*>\s*(.+?)\s*\*/}) {
-    parse(File.read($1))
+    parse(File.read File.join($dir, $1))
   }
   text
 end
 
-unless ARGV.empty?
-  ARGV.each do |a|
-    puts parse(File.read(a))
-  end
-end
-
-if STDIN.stat.size > 0
-  puts parse(STDIN.read)
+if not ARGV.empty?
+  puts parse File.read ARGV.first
+elsif STDIN.stat.size > 0
+  puts parse STDIN.read
 end
