@@ -2,20 +2,20 @@
 
 def parse(text='')
   text.gsub!(%r{"/\*>\s*(.+?)\s*\*/"}) {
-    "'" << File.read($1).gsub(%r{$}, '\\').chop << "'"
+    "'" << parse(File.read($1)).gsub(%r{$}, '\\').chop << "'"
   }
   text.gsub!(%r{/\*>\s*(.+?)\s*\*/}) {
-    File.read($1)
+    parse(File.read($1))
   }
-  puts text
+  text
 end
 
 unless ARGV.empty?
   ARGV.each do |a|
-    parse(File.read(a))
+    puts parse(File.read(a))
   end
 end
 
 if STDIN.stat.size > 0
-  parse(STDIN.read)
+  puts parse(STDIN.read)
 end
