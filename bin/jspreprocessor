@@ -13,7 +13,9 @@ def parse(text='')
 end
 
 if not ARGV.empty?
-  puts parse File.read ARGV.first
+  ARGV.each do |a|
+    puts parse File.read a
+  end
 elsif STDIN.stat.size > 0
   puts parse STDIN.read
 end
