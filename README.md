@@ -1,11 +1,11 @@
 JavaScript preprocessor
 ===============
-Minimal preprocessing with /*>*/
+Minimal preprocessing with `/*>*/`
 
 
 Usage
 ----
-    jspp input > output
+`jspp input > output`
 
 Example
 ----
@@ -13,12 +13,15 @@ Example
     /*> script.js */
     
     var style = "/*> style.css */";
+
     $ cat example/script.js
     var my_script;example
+
     $ cat example/style.css
     html, body {margin:0; padding:0}
     /*> style-child.css */
     .my-style {background: #fffacc}
+    
     $ cat example/style-child.css
     .i-am-child {}
     
