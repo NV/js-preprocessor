@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+$dir = File.dirname ARGV.first || '.'
+$r_include = %r{/\*>\s*(.+?)\s*\*/}
+$r_include_inside_string = Regexp.new('"' << $r_include.source << '"')
+
+def parse(text='')
+  text.gsub!($r_include_inside_string) {
+    '"' << parse(File.read File.join($dir, $1)).gsub(%r{$}, '\\').chop << '"'
+  }
+  text.gsub!($r_include) {
+    parse(File.read File.join($dir, $1))
+  }
+  text
+end
+
+if not ARGV.empty?
+  ARGV.each do |a|
+    print parse File.read a
+  end
+elsif STDIN.stat.size > 0
+  print parse STDIN.read
+else
+  puts <<-multiline
+/*>*/  JavaScript Preprocessor  "/*>*/"
+
+Usage: jspp input > output
+  multiline
+end
