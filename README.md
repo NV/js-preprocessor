@@ -19,7 +19,7 @@ Example
 
     $ cat example/style.css
     html, body {margin:0; padding:0}
-    /*> style-child.css */
+    /*> http://github.com/NV/js-preprocessor/raw/gh-pages/example/style-child.css */
     .my-style {background: #fffacc}
     
     $ cat example/style-child.css
