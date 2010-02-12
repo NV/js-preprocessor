@@ -9,22 +9,24 @@ Usage
 
 Example
 ----
-    $ cat example/main.js
-    /*> script.js */
-    
-    var style = "/*> style.css */";
+<table><tr>
+<td>main.js
+<pre>/*> script.js */
 
-    $ cat example/script.js
-    var my_script;example
+var style = "/*> style.css */";</pre></td>
+<td>style.css
+<pre>html, body {margin:0; padding:0}
+/*> http://nv.github.com/js-preprocessor/example/style-child.css */
+.my-style {background: #fffacc}
+</pre></td>
+<td><br/>style-child.css
+<pre>.i-am-child {}
+</pre></td>
+</tr><tr>
+<td><br/>script.js
+<pre>var my_script;</pre></td>
+</tr></table>
 
-    $ cat example/style.css
-    html, body {margin:0; padding:0}
-    /*> http://github.com/NV/js-preprocessor/raw/gh-pages/example/style-child.css */
-    .my-style {background: #fffacc}
-    
-    $ cat example/style-child.css
-    .i-am-child {}
-    
     $ bin/jspp example/main.js
     var my_script;
     
