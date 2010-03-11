@@ -27,13 +27,15 @@ var style = "/*> style.css */";</pre></td>
 <pre>var my_script;</pre></td>
 </tr></table>
 
-    $ bin/jspp example/main.js
+    $ jspp example/main.js
     var my_script;
     
     var style = "html, body {margin:0; padding:0}\
     .i-am-child {}\
     .my-style {background: #fffacc}"
 
+JavaScript preprocessor in a wild:
+[GitHub Live Preview](http://github.com/NV/github-live-preview).
 
 Installation
 ----
