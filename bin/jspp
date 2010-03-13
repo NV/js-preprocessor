@@ -1,31 +1,6 @@
 #!/usr/bin/env ruby
 
-$dir = File.dirname ARGV.first || '.'
-$r_include = %r{/\*>\s*(.+?)\s*\*/}
-$r_include_inside_string = Regexp.new('"' << $r_include.source << '"')
-
-
-def get_file(path='')
-  if path.index('http://') or path.index('https://')
-    require 'open-uri'
-    open(path).read
-  else
-    File.read File.join($dir, path)
-  end
-end
-
-def parse(text='')
-  text.gsub!($r_include_inside_string) {
-    '"' << parse(get_file $1).gsub(/$/, '\\').chop << '"'
-  }
-  text.gsub!($r_include) {
-    parse(get_file $1)
-  }
-  text
-end
-
-if ($stdin.tty? && ARGV.empty?) || ARGV.delete('-h') || ARGV.delete('--help')
-  puts <<-multiline
+HELP = <<-multiline
 
           JavaScript Preprocessor
 
@@ -45,10 +20,37 @@ Example:      main.js:  /*> script.js */
 
  jspp example/main.js:  var my_script;
 
-                        var style = "html, body {margin:0; padding:0}\\ 
+                        var style = "html, body {margin:0; padding:0}\\
                         .i-am-child {}\\
                         .my-style {background: #fffacc}"
-  multiline
+multiline
+
+DIR = File.dirname ARGV.first || '.'
+R_INCLUDE = %r{/\*>\s*(.+?)\s*\*/}
+R_INCLUDE_INSIDE_STRING = Regexp.new('"' << R_INCLUDE.source << '"')
+
+
+def get_file(path='')
+  if path.index('http://') or path.index('https://')
+    require 'open-uri'
+    open(path).read
+  else
+    File.read File.join(DIR, path)
+  end
+end
+
+def parse(text='')
+  text.gsub!(R_INCLUDE_INSIDE_STRING) {
+    '"' << parse(get_file $1).gsub(/$/, '\\').chop << '"'
+  }
+  text.gsub!(R_INCLUDE) {
+    parse(get_file $1)
+  }
+  text
+end
+
+if ($stdin.tty? && ARGV.empty?) || ARGV.delete('-h') || ARGV.delete('--help')
+  puts HELP
 else
   print parse ARGF.read
 end
