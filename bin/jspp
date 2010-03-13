@@ -6,22 +6,12 @@ $r_include_inside_string = Regexp.new('"' << $r_include.source << '"')
 
 
 def get_file(path='')
-  result = ''
-  if path.start_with? 'http://'
-    require 'net/http'
-    url = URI.parse path
-    Net::HTTP.start url.host, url.port do |http|
-      page = http.get url.path
-      if page.is_a? Net::HTTPSuccess
-        result = page.body
-      else
-        raise
-      end
-    end
+  if path.index('http://') or path.index('https://')
+    require 'open-uri'
+    open(path).read
   else
-    result = File.read File.join($dir, path)
+    File.read File.join($dir, path)
   end
-  result
 end
 
 def parse(text='')
