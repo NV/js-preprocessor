@@ -27,10 +27,10 @@ multiline
 
 DIR = File.dirname ARGV.first || '.'
 R_INCLUDE = %r{/\*>\s*(.+?)\s*\*/}
-R_INCLUDE_INSIDE_STRING = Regexp.new('"' << R_INCLUDE.source << '"')
+R_INCLUDE_INSIDE_STRING = %r{"#{R_INCLUDE.source}"}
 
 
-def get_file(path='')
+def get_file path=''
   if path.index('http://') or path.index('https://')
     require 'open-uri'
     open(path).read
@@ -39,12 +39,12 @@ def get_file(path='')
   end
 end
 
-def parse(text='')
+def parse text=''
   text.gsub!(R_INCLUDE_INSIDE_STRING) {
     '"' << parse(get_file $1).gsub(/$/, '\\').chop << '"'
   }
   text.gsub!(R_INCLUDE) {
-    parse(get_file $1)
+    parse get_file $1
   }
   text
 end

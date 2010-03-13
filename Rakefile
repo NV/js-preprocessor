@@ -17,7 +17,7 @@ def version
 end
 
 spec = Gem::Specification.new do |s|
-  s.name = s.rubyforge_project = 'jspp'
+  s.name = 'jspp'
   s.version = version
   s.description = 'JavaScript and CSS squasher. Used for building UserJS. Similar to sprockets and juicer.'
   s.summary = 'JavaScript preprocessor'
@@ -37,6 +37,7 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = false
 end
 
+# rake gem
 Rake::GemPackageTask.new(spec) do |pkg|
   pkg.need_zip = true
   pkg.need_tar = true
