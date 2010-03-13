@@ -49,7 +49,7 @@ def parse(text='')
   text
 end
 
-if ($stdin.tty? && ARGV.empty?) || ARGV.delete('-h') || ARGV.delete('--help')
+if $stdin.tty? and ARGV.empty? or ARGV.delete('-h') or ARGV.delete('--help')
   puts HELP
 else
   print parse ARGF.read
