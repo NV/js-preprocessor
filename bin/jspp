@@ -34,16 +34,31 @@ def parse(text='')
   text
 end
 
-if not ARGV.empty?
-  ARGV.each do |a|
-    print parse File.read a
-  end
-elsif STDIN.stat.size > 0
-  print parse STDIN.read
-else
+if ($stdin.tty? && ARGV.empty?) || ARGV.delete('-h') || ARGV.delete('--help')
   puts <<-multiline
-/*>*/  JavaScript Preprocessor  "/*>*/"
 
-Usage: jspp input > output
+          JavaScript Preprocessor
+
+  Usage:  jspp input > output
+
+Example:      main.js:  /*> script.js */
+
+                        var style = "/*> style.css */";
+
+            style.css:  html, body {margin:0; padding:0}
+                        /*> http://nv.github.com/js-preprocessor/example/style-child.css */
+                        .my-style {background: #fffacc}
+
+      style-child.css:  .i-am-child {}
+
+            script.js:  var my_script;
+
+ jspp example/main.js:  var my_script;
+
+                        var style = "html, body {margin:0; padding:0}\\ 
+                        .i-am-child {}\\
+                        .my-style {background: #fffacc}"
   multiline
+else
+  print parse ARGF.read
 end
