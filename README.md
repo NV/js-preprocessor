@@ -43,8 +43,6 @@ Installation
 
     $ gem install jspp
 
-Also, you can use `bin/jspp` directly. It’s just self-contained ruby script with no dependencies.
-
 Why reinvent the wheel?
 ----
 [Sprockets](http://github.com/sstephenson/sprockets) can't include non-JS files.
