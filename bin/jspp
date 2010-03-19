@@ -11,7 +11,7 @@ Example:      main.js:  /*> script.js */
                         var style = "/*> style.css */";
 
             style.css:  html, body {margin:0; padding:0}
-                        /*> http://nv.github.com/js-preprocessor/example/style-child.css */
+                        /*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
                         .my-style {background: #fffacc}
 
       style-child.css:  .i-am-child {}
@@ -29,22 +29,28 @@ DIR = File.dirname ARGV.first || '.'
 R_INCLUDE = %r{/\*>\s*(.+?)\s*\*/}
 R_INCLUDE_INSIDE_STRING = %r{"#{R_INCLUDE.source}"}
 
-
-def get_file path=''
+def get_file path, base_dir='.'
   if path.index'http://' or path.index'https://'
     require 'open-uri'
-    open(path).read
+    file = open(path).read
+    dir = File.dirname path
   else
-    File.read File.join(DIR, path)
+    full_path = File.join base_dir, path
+    file = File.read full_path
+    dir = File.dirname full_path
   end
+  [file, dir]
 end
 
-def parse text=''
+def parse text='', base_dir='.'
   text.gsub!(R_INCLUDE_INSIDE_STRING) {
-    '"' << parse(get_file $1).gsub(/$/, '\\').chop << '"'
+    file, dir = get_file $1, base_dir
+    parsed = parse file, dir
+    '"' << parsed.gsub(/$/, '\\').chop << '"'
   }
   text.gsub!(R_INCLUDE) {
-    parse get_file $1
+    file, dir = get_file $1, base_dir
+    parse file, dir
   }
   text
 end
@@ -52,5 +58,5 @@ end
 if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
   puts HELP
 else
-  print parse ARGF.read
+  print parse(ARGF.read, DIR)
 end
