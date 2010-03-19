@@ -1,3 +1,3 @@
 /*> script.js */
 
-var style = "/*> style.css */";
+var style = "/*> css/style.css */";

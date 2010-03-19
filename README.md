@@ -13,13 +13,13 @@ Example
 <td>main.js
 <pre>/*> script.js */
 
-var style = "/*> style.css */";</pre></td>
-<td>style.css
+var style = "/*> css/style.css */";</pre></td>
+<td>css/style.css
 <pre>html, body {margin:0; padding:0}
-/*> http://nv.github.com/js-preprocessor/example/style-child.css */
+/*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
 .my-style {background: #fffacc}
 </pre></td>
-<td><br/>style-child.css
+<td><br/>css/style-child.css
 <pre>.i-am-child {}
 </pre></td>
 </tr><tr>

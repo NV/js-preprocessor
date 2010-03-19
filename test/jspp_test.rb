@@ -11,8 +11,8 @@ class JSPreprocessorTest < Test::Unit::TestCase
   end
 
   def test_examples
-    assert_equal File.read("#{EXAMPLE}style-child.css"), jspp('style-child.css')
-    assert_equal <<-multiline, jspp('style.css')
+    assert_equal File.read("#{EXAMPLE}css/style-child.css"), jspp('css/style-child.css')
+    assert_equal <<-multiline, jspp('css/style.css')
 html, body {margin:0; padding:0}
 .i-am-child {}
 .my-style {background: #fffacc}
