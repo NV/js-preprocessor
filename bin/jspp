@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
-HELP = <<-multiline
+require 'jspp'
+
+if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
+  puts <<-how_to_use
 
           JavaScript Preprocessor
 
@@ -23,40 +26,8 @@ Example:      main.js:  /*> script.js */
                         var style = "html, body {margin:0; padding:0}\\
                         .i-am-child {}\\
                         .my-style {background: #fffacc}"
-multiline
-
-DIR = File.dirname ARGV.first || '.'
-R_INCLUDE = %r{/\*>\s*(.+?)\s*\*/}
-R_INCLUDE_INSIDE_STRING = %r{"#{R_INCLUDE.source}"}
-
-def get_file path, base_dir='.'
-  if path.index'http://' or path.index'https://'
-    require 'open-uri'
-    file = open(path).read
-    dir = File.dirname path
-  else
-    full_path = File.join base_dir, path
-    file = File.read full_path
-    dir = File.dirname full_path
-  end
-  [file, dir]
-end
-
-def parse text='', base_dir='.'
-  text.gsub!(R_INCLUDE_INSIDE_STRING) {
-    file, dir = get_file $1, base_dir
-    parsed = parse file, dir
-    '"' << parsed.gsub(/$/, '\\').chop << '"'
-  }
-  text.gsub!(R_INCLUDE) {
-    file, dir = get_file $1, base_dir
-    parse file, dir
-  }
-  text
-end
-
-if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
-  puts HELP
+how_to_use
 else
-  print parse(ARGF.read, DIR)
+  DIR = File.dirname ARGV.first || '.'
+  print JSPP(ARGF.read, DIR)
 end

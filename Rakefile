@@ -1,10 +1,11 @@
-require 'rake/testtask'
+require 'spec/rake/spectask'
 require 'rake/gempackagetask'
 
-task :default => :test
+task :default => :spec
 
-Rake::TestTask.new do |t|
-  t.test_files = FileList['test/*_test.rb']
+# rake spec
+Spec::Rake::SpecTask.new do |t|
+  t.spec_opts = ['-c', '--format specdoc']
   t.verbose = true
 end
 
@@ -25,15 +26,8 @@ spec = Gem::Specification.new do |s|
   s.date = Date.today
   s.authors = ['Nikita Vasilyev']
   s.email = `git log --pretty=format:"%ae" -1`
-  s.files = [
-    'bin/jspp',
-    'test/jspp_test.rb'
-  ]
   s.executables = ['jspp']
-  s.test_files = [
-    'test/jspp_test.rb'
-  ]
-  s.require_path = 'bin'
+  s.test_files = Dir['spec/**/*']
   s.has_rdoc = false
 end
 
