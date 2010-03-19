@@ -14,6 +14,7 @@ def version
   tag = git_describe_tags.split('-').first || git_describe_tags
   tag.strip!
   commits_count_after_last_tag = `git rev-list --full-history #{tag}.. -- bin/ | wc -l`.strip
+  tag.slice! 0
   "#{tag}.#{commits_count_after_last_tag}"
 end
 
