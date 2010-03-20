@@ -1,33 +1,34 @@
 #!/usr/bin/env ruby
 
+# Usage: jspp input > output
+#
+# EXAMPLE
+#              main.js:  /*> script.js */
+#
+#                        var style = "/*> style.css */";
+#
+#            style.css:  html, body {margin:0; padding:0}
+#                        /*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
+#                        .my-style {background: #fffacc}
+#
+#      style-child.css:  .i-am-child {}
+#
+#            script.js:  var my_script;
+#
+# jspp example/main.js:  var my_script;
+#
+#                        var style = "html, body {margin:0; padding:0}\\
+#                        .i-am-child {}\\
+#                        .my-style {background: #fffacc}"
+
 require 'jspp'
 
 if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
-  puts <<-how_to_use
-
-          JavaScript Preprocessor
-
-  Usage:  jspp input > output
-
-Example:      main.js:  /*> script.js */
-
-                        var style = "/*> style.css */";
-
-            style.css:  html, body {margin:0; padding:0}
-                        /*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
-                        .my-style {background: #fffacc}
-
-      style-child.css:  .i-am-child {}
-
-            script.js:  var my_script;
-
- jspp example/main.js:  var my_script;
-
-                        var style = "html, body {margin:0; padding:0}\\
-                        .i-am-child {}\\
-                        .my-style {background: #fffacc}"
-how_to_use
+  $stderr.puts File.read(__FILE__).grep(/^#[^!]/) {|line|
+    line.sub /^# ?/, ''
+  }.join
+  exit 1
 else
-  DIR = File.dirname ARGV.first || '.'
-  print JSPP(ARGF.read, DIR)
+  dir = File.dirname ARGV.first || '.'
+  print JSPP(ARGF.read, dir)
 end
