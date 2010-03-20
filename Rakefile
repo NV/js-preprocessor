@@ -13,7 +13,7 @@ def version
   git_describe_tags = `git describe --tags`
   tag = git_describe_tags.split('-').first || git_describe_tags
   tag.strip!
-  commits_count_after_last_tag = `git rev-list --full-history #{tag}.. -- bin/ | wc -l`.strip
+  commits_count_after_last_tag = `git rev-list --full-history #{tag}.. -- lib/ | wc -l`.strip
   tag.slice! 0
   "#{tag}.#{commits_count_after_last_tag}"
 end
@@ -27,8 +27,9 @@ spec = Gem::Specification.new do |s|
   s.date = Date.today
   s.authors = ['Nikita Vasilyev']
   s.email = `git log --pretty=format:"%ae" -1`
+  s.files = Dir['lib/**/*', 'bin/**/*', 'README.md']
   s.executables = ['jspp']
-  s.test_files = Dir['spec/**/*']
+  s.test_files = Dir['spec/**/*', 'example/**/*']
   s.has_rdoc = false
 end
 
