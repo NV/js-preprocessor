@@ -1,6 +1,25 @@
 require 'helper'
 
 describe JSPP do
+
+  describe '::INCLUDE' do
+    it 'matches files' do
+      JSPP::INCLUDE.match('/*> path_to/my_file.js */')[1].should == 'path_to/my_file.js'
+    end
+    it 'matches URIs' do
+      JSPP::INCLUDE.match('/*> http://elv1s.ru/x/pets.txt */')[1].should == 'http://elv1s.ru/x/pets.txt'
+    end
+  end
+
+  describe '::INCLUDE_INSIDE_STRING' do
+    it 'matches local files inside strings' do
+      JSPP::INCLUDE_INSIDE_STRING.match('"/*> path_to/my_file.js */"')[1].should == 'path_to/my_file.js'
+    end
+    it 'matches URIs inside strings' do
+      JSPP::INCLUDE_INSIDE_STRING.match('"/*> http://elv1s.ru/x/pets.txt */"')[1].should == 'http://elv1s.ru/x/pets.txt'
+    end
+  end
+
   describe '#get_file' do
     it 'fetches URI' do
       JSPP.new.get_file(PETS_URL).first.should == PETS
