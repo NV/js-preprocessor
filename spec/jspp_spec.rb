@@ -48,3 +48,17 @@ var style = "html, body {margin:0; padding:0}\\
   end
 
 end
+
+
+describe Kernel, '#JSPP' do
+  it 'do all the stuff' do
+    JSPP(EXAMPLE + '/main.js').should == <<-result
+var my_script;
+
+var style = "html, body {margin:0; padding:0}\\
+.i-am-child {}\\
+.my-style {background: #fffacc}\\
+";
+    result
+  end
+end

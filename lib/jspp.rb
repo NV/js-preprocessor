@@ -32,7 +32,9 @@ class JSPP
 end
 
 module Kernel
-  def JSPP text, base_dir='.'
+  def JSPP path
+    text = File.read path
+    base_dir = File.dirname path
     JSPP.new.parse text, base_dir
   end
   private :JSPP
