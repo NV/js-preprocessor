@@ -8,7 +8,7 @@
 #                        var style = "/*> style.css */";
 #
 #            style.css:  html, body {margin:0; padding:0}
-#                        /*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
+#                        /*> http://js-preprocessor.com/example/css/child.css */
 #                        .my-style {background: #fffacc}
 #
 #      style-child.css:  .i-am-child {}

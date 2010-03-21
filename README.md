@@ -16,7 +16,7 @@ Example
 var style = "/*> css/style.css */";</pre></td>
 <td>css/style.css
 <pre>html, body {margin:0; padding:0}
-/*> http://nv.github.com/js-preprocessor/example/css/style-child.css */
+/*> http://js-preprocessor.com/example/css/child.css */
 .my-style {background: #fffacc}
 </pre></td>
 <td><br/>css/style-child.css
