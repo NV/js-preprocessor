@@ -19,7 +19,7 @@ var style = "/*> css/style.css */";</pre></td>
 /*> http://js-preprocessor.com/example/css/child.css */
 .my-style {background: #fffacc}
 </pre></td>
-<td><br/>css/style-child.css
+<td><br/>css/child.css
 <pre>.i-am-child {}
 </pre></td>
 </tr><tr>
@@ -35,7 +35,8 @@ var style = "/*> css/style.css */";</pre></td>
     .my-style {background: #fffacc}"
 
 JavaScript preprocessor in a wild:
-[GitHub Live Preview](http://github.com/NV/github-live-preview).
+[GitHub Live Preview](http://github.com/NV/github-live-preview),
+[Nice Alert](http://github.com/NV/nice-alert.js).
 
 Installation
 ----
