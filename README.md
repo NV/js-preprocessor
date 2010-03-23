@@ -1,4 +1,4 @@
-JavaScript preprocessor
+[JavaScript preprocessor](http://js-preprocessor.com)
 ===============
 Minimal preprocessing with `/*>*/`
 
