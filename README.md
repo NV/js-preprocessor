@@ -36,6 +36,7 @@ var style = "/*> css/style.css */";</pre></td>
 
 JavaScript preprocessor in a wild:
 [GitHub Live Preview](http://github.com/NV/github-live-preview),
+[Faviconize Google](http://github.com/NV/faviconize-google.js),
 [Nice Alert](http://github.com/NV/nice-alert.js).
 
 Installation
