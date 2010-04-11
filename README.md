@@ -51,4 +51,4 @@ Why reinvent the wheel?
 JS preprocessor can.
 
 [Juicer](http://github.com/cjohansen/juicer) don't have any analogies to `"/*> some_file */"`.
-I.e., it can't include include files inside multiline string.
+I.e., it can't include files as multiline string.
