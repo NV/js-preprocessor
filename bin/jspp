@@ -17,8 +17,8 @@
 #
 # jspp example/main.js:  var my_script;
 #
-#                        var style = "html, body {margin:0; padding:0}\\
-#                        .i-am-child {}\\
+#                        var style = "html, body {margin:0; padding:0}\
+#                        .i-am-child {}\
 #                        .my-style {background: #fffacc}"
 
 require 'jspp'
