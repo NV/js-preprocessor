@@ -29,6 +29,5 @@ if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
   }.join
   exit 1
 else
-  dir = File.dirname ARGV.first || '.'
-  print JSPP(ARGF.read, dir)
+  print JSPP ARGV.first
 end
