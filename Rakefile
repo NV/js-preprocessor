@@ -30,6 +30,7 @@ spec = Gem::Specification.new do |s|
   s.files = Dir['lib/**/*', 'bin/**/*', 'README.md']
   s.executables = ['jspp']
   s.test_files = Dir['spec/**/*', 'example/**/*']
+  s.rubyforge_project = 'jspp'
   s.has_rdoc = false
 end
 
