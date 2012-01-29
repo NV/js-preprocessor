@@ -1,11 +1,12 @@
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 require 'rake/gempackagetask'
+require 'date'
 
 task :default => :spec
 
 # rake spec
-Spec::Rake::SpecTask.new do |t|
-  t.spec_opts = ['-c', '--format specdoc']
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = ['-c', '--format specdoc']
   t.verbose = true
 end
 
