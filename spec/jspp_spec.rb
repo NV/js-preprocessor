@@ -35,6 +35,15 @@ var style = "html, body {margin:0; padding:0}\\
     it 'returns same text if no /*> file */ was found' do
       JSPP.new.parse(PETS).should == PETS
     end
+    it 'escapes quotes when loading text inside strings' do
+      file = File.read(EXAMPLE + '/quotes.js')
+      JSPP.new.parse(file, EXAMPLE).should == <<-result
+var test = "input[type=\\"submit\\"] {\\
+  cursor: pointer;\\
+}\\
+";
+      result
+    end
   end
 
   describe '#get_file' do
