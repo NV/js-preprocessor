@@ -7,7 +7,7 @@ class JSPP
     text.gsub!(INCLUDE_INSIDE_STRING) {
       file, dir = get_file $1, base_dir
       parsed = parse file, dir
-      '"' << parsed.gsub(/$/, '\\').chop << '"'
+      '"' << parsed.gsub(/$/, '\\').gsub(/"/, '\\"').chop << '"'
     }
     text.gsub!(INCLUDE) {
       file, dir = get_file $1, base_dir
