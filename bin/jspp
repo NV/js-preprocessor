@@ -24,7 +24,7 @@
 require 'jspp'
 
 if $stdin.tty? and ARGV.empty? or ARGV.delete'-h' or ARGV.delete'--help'
-  $stderr.puts File.read(__FILE__).grep(/^#[^!]/) {|line|
+  $stderr.puts File.read(__FILE__).lines.grep(/^#[^!]/) {|line|
     line.sub /^# ?/, ''
   }.join
   exit 1
